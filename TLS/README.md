@@ -3,7 +3,7 @@
 ```sh
 # Даты сертификата, издатель
 # from site
-echo | openssl s_client -connect admin.premiumbonus.su:443 2>/dev/null | openssl x509 -noout -dates -issuer
+echo | openssl s_client -connect yandex.ru:443 2>/dev/null | openssl x509 -noout -dates -issuer
 
 # from file
 echo | openssl x509 -in 2.crt -text 2>/dev/null | openssl x509 -noout -dates -issuer
