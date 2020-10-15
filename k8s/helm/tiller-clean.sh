@@ -2,8 +2,9 @@
 
 TARGET_NUM_REVISIONS=10
 TARGET_NUM_REVISIONS=$(($TARGET_NUM_REVISIONS+0))
+CONTEXT=yc
 
-RELEASES=$(kubectl --namespace=kube-system get cm -l OWNER=TILLER -o go-template --template='{{range .items}}{{ .metadata.labels.NAME }}{{"\n"}}{{ end }}' | sort -u)
+RELEASES=$(kubectl --context $CONTEXT --namespace=kube-system get cm -l OWNER=TILLER -o go-template --template='{{range .items}}{{ .metadata.labels.NAME }}{{"\n"}}{{ end }}' | sort -u)
 
 # create the directory to store backups
 mkdir configmaps
@@ -11,7 +12,7 @@ mkdir configmaps
 for RELEASE in $RELEASES
 do
   # get the revisions of this release
-  REVISIONS=$(kubectl --namespace=kube-system get cm -l OWNER=TILLER -l NAME=$RELEASE | awk '{if(NR>1)print $1}' | sed 's/.*\.v//' | sort -n)
+  REVISIONS=$(kubectl --context $CONTEXT --namespace=kube-system get cm -l OWNER=TILLER -l NAME=$RELEASE | awk '{if(NR>1)print $1}' | sed 's/.*\.v//' | sort -n)
   NUM_REVISIONS=$(echo $REVISIONS | tr " " "\n" | wc -l)
   NUM_REVISIONS=$(($NUM_REVISIONS+0))
 
@@ -27,9 +28,9 @@ do
       CMNAME=$RELEASE.v$DELETE_REVISION
       echo "Deleting $CMNAME"
       # Take a backup
-      kubectl --namespace=kube-system get cm $CMNAME -o yaml > configmaps/$CMNAME.yaml
+      kubectl --context $CONTEXT --namespace=kube-system get cm $CMNAME -o yaml > configmaps/$CMNAME.yaml
       # Do the delete
-      kubectl --namespace=kube-system delete cm $CMNAME
+      kubectl --context $CONTEXT --namespace=kube-system delete cm $CMNAME
     done
   fi
 done
