@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
+# Delete extra release configmaps
+
 TARGET_NUM_REVISIONS=10
-TARGET_NUM_REVISIONS=$(($TARGET_NUM_REVISIONS+0))
-CONTEXT=yc
+CONTEXT=prod
 
 RELEASES=$(kubectl --context $CONTEXT --namespace=kube-system get cm -l OWNER=TILLER -o go-template --template='{{range .items}}{{ .metadata.labels.NAME }}{{"\n"}}{{ end }}' | sort -u)
 
