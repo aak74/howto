@@ -1,0 +1,15 @@
+EHLO example.com
+AUTH LOGIN
+USER_NAME_ENCODED
+PASSWORD_ENCODED
+MAIL FROM: noreply@example.com
+RCPT TO: user@example.com
+DATA
+X-SES-CONFIGURATION-SET: ConfigSet
+From: noreply Name <noreply@example.com>
+To: user@example.com
+Subject: Amazon SES SMTP Test
+
+This message was sent using the Amazon SES SMTP interface.
+.
+QUIT
