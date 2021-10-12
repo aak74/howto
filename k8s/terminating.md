@@ -21,5 +21,5 @@ kubectl get pv | tail -n+2 | awk '{print $1}' | xargs -I{} kubectl patch pv {} -
 ## Pods
 [stackoverflow][https://stackoverflow.com/a/55080289/1979624]
 ```sh
-NAMESPACE=mynamespace for p in $(kubectl get pods -n $NAMESPACE| grep Terminating | awk '{print $1}'); do kubectl delete pod $p --grace-period=0 --force -n $NAMESPACE;done
+NAMESPACE=mynamespace; for p in $(kubectl get pods -n $NAMESPACE| grep Terminating | awk '{print $1}'); do kubectl delete pod $p --grace-period=0 --force -n $NAMESPACE;done
 ```
