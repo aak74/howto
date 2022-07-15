@@ -2,6 +2,10 @@
 
 # Delete extra release configmaps
 
+# How to use
+# 1. Change CONTEXT and TARGET_NUM_REVISIONS
+# 2. Run ./tiller-clean.sh
+
 TARGET_NUM_REVISIONS=10
 CONTEXT=prod
 

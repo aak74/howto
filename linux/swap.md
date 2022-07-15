@@ -6,7 +6,7 @@
 ## Изменение размера swap
 
 (Оригинальная статья)[https://bogdancornianu.com/change-swap-size-in-ubuntu/]
-```sh
+```shell script
 # Turn off all swap processes
 sudo swapoff -a
 

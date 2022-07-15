@@ -2,7 +2,7 @@
 
 # Delete all release configmaps without namespace
 
-CONTEXT=yc
+CONTEXT=prod
 
 set -e
 
