@@ -13,4 +13,5 @@ CREATE TABLESPACE etl LOCATION '/data/tablespace';
 ALTER TABLE etl.account SET TABLESPACE etl;
 
 ALTER DATABASE my-db SET default_tablespace = etl;
+ALTER INDEX my_index SET TABLESPACE etl;
 ```
